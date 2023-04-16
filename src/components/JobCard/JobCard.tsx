@@ -19,7 +19,7 @@ const JobCard = ({
 }: Props) => {
   return (
     <div
-      className={`flex items-start py-16 px-24 border border-grey rounded-lg	w-830 ${containerClassName}`}
+      className={`flex items-start py-16 px-24 border border-grey rounded-lg w-830 ${containerClassName}`}
     >
       <img src={Netflix} alt="company logo" />
       <div className="ml-8">
