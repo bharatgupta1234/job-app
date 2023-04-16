@@ -7,10 +7,14 @@ interface Props {
 }
 
 const Button = ({ name, onPress, secondary = false }: Props) => {
+  const className = secondary
+    ? "bg-white text-primary border border-primary"
+    : "bg-primary text-white";
+
   return (
     <button
       onClick={onPress}
-      className="bg-primary text-white font-bold py-8 px-16 rounded"
+      className={`${className} font-medium	 py-8 px-16 rounded`}
     >
       {name}
     </button>

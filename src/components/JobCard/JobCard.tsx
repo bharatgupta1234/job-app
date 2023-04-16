@@ -45,7 +45,11 @@ const JobCard = ({
             </div>
           ) : null}
           {jobDetails.isExternalApply ? (
-            <Button name="External Apply" onPress={onPressExternalApply} />
+            <Button
+              name="External Apply"
+              onPress={onPressExternalApply}
+              secondary
+            />
           ) : null}
         </div>
       </div>
