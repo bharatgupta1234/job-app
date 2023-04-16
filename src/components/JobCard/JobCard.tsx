@@ -39,10 +39,14 @@ const JobCard = ({
           <p className="text-dark mt-8">{`${jobDetails.totalEmployees} employees`}</p>
         </div>
         <div className="flex justify-between">
-          <Button name="Apply Now" onPress={() => {}} />
-          <div className="ml-8">
-            <Button name="External Apply" onPress={() => {}} />
-          </div>
+          {jobDetails.isQuickApply ? (
+            <div className="mr-8">
+              <Button name="Apply Now" onPress={onPressApplyNow} />
+            </div>
+          ) : null}
+          {jobDetails.isExternalApply ? (
+            <Button name="External Apply" onPress={onPressExternalApply} />
+          ) : null}
         </div>
       </div>
     </div>
