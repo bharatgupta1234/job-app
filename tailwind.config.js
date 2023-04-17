@@ -7,6 +7,7 @@ module.exports = {
       white: "#FAFAFA",
       error: "#D86161",
       placeholder: "#7A7A7A",
+      primary: "#1597E4",
     },
     placeholderColor: {
       grey: "#1597E4",
