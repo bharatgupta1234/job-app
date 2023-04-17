@@ -4,9 +4,15 @@ interface Props {
   onPress: () => void;
   name: string;
   secondary?: boolean;
+  containerClassName?: string;
 }
 
-const Button = ({ name, onPress, secondary = false }: Props) => {
+const Button = ({
+  name,
+  onPress,
+  secondary = false,
+  containerClassName = "",
+}: Props) => {
   const className = secondary
     ? "bg-white text-primary border border-primary"
     : "bg-primary text-white";
@@ -14,7 +20,7 @@ const Button = ({ name, onPress, secondary = false }: Props) => {
   return (
     <button
       onClick={onPress}
-      className={`${className} font-medium	 py-8 px-16 rounded`}
+      className={`${className} font-medium py-8 px-16 rounded ${containerClassName}`}
     >
       {name}
     </button>
