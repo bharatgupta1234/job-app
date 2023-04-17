@@ -33,7 +33,7 @@ const Step2 = () => {
           placeholder="ex: 100"
         />
         <Button
-          name="Next"
+          name="Save"
           containerClassName="absolute right-32 bottom-32"
           onPress={() => {}}
         />
