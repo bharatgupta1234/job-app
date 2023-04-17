@@ -7,7 +7,9 @@ module.exports = {
       white: "#FAFAFA",
       error: "#D86161",
       placeholder: "#7A7A7A",
-      primary: "#1597E4",
+    },
+    placeholderColor: {
+      grey: "#1597E4",
     },
     borderColor: {
       grey: "#E6E6E6",
@@ -16,17 +18,24 @@ module.exports = {
     colors: {
       primary: "#1597E4",
       white: "#FFFFFF",
-    },
-    spacing: {
-      4: "4px",
-      8: "8px",
-      16: "16px",
-      24: "24px",
-      32: "32px",
+      grey: "#E6E6E6",
+      black: "#000000",
     },
     extend: {
       width: {
         830: "830px",
+        577: "577px",
+      },
+      height: {
+        564: "564px",
+      },
+      spacing: {
+        4: "4px",
+        8: "8px",
+        12: "12px",
+        16: "16px",
+        24: "24px",
+        32: "32px",
       },
     },
   },
