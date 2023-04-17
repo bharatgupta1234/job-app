@@ -1,5 +1,4 @@
-import { Button, Modal, TextInput } from "components/ui";
-import React from "react";
+import { Button, Modal, TextInput } from "components";
 
 const Step1 = () => {
   return (

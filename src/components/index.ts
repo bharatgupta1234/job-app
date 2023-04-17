@@ -1,4 +1,4 @@
 import { JobCard } from "./JobCard";
-import { Button } from "./ui";
+import { Button, Modal, TextInput } from "./ui";
 
-export { JobCard, Button };
+export { JobCard, Button, Modal, TextInput };
