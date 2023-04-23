@@ -4,6 +4,29 @@ import Netflix from "assets/netflix.svg";
 import { Button, CreateEditFlow, FlowHandle, FlowMode } from "components";
 import { Job, JobWithoutId } from "pages/Home/types";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { convertToInr } from "utils/string";
+
+const getJobText = (minExp?: string, maxExp?: string) => {
+  if (minExp && maxExp) {
+    return `Experience (${minExp} - ${maxExp} years)`;
+  }
+  if (minExp || maxExp) {
+    return `Experience ${minExp || maxExp} years`;
+  }
+};
+
+const getSalaryText = (minSalary?: string, maxSalary?: string) => {
+  const _minSalary = convertToInr(Number(minSalary));
+  const _maxSalary = convertToInr(Number(maxSalary));
+
+  if (minSalary && maxSalary) {
+    return `INR (₹) ${_minSalary} - ${_maxSalary} / Month`;
+  }
+
+  if (minSalary || maxSalary) {
+    return `INR (₹) ${_minSalary || _maxSalary} / Month`;
+  }
+};
 
 interface Props {
   jobDetails: Job;
@@ -60,9 +83,11 @@ const JobCard = ({
         <div className="my-24">
           <p className="text-dark">Part-Time (9.00 am - 5.00 pm IST)</p>
           <p className="text-dark mt-8">
-            Experience {`(${jobDetails.minExp} - ${jobDetails.maxExp} years)`}
+            {getJobText(jobDetails.minExp, jobDetails.maxExp)}
           </p>
-          <p className="text-dark mt-8">{`INR (₹) ${jobDetails.minSalary} - ${jobDetails.maxSalary} / Month`}</p>
+          <p className="text-dark mt-8">
+            {getSalaryText(jobDetails.minSalary, jobDetails.maxSalary)}
+          </p>
           <p className="text-dark mt-8">{`${jobDetails.totalEmployees} employees`}</p>
         </div>
         <div className="flex justify-between">
