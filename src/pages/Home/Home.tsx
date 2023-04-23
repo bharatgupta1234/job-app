@@ -1,53 +1,28 @@
 import {
   Button,
   JobCard,
-  Step1Modal,
-  Step2Modal,
-  Step1Data,
-  Step2Data,
+  CreateEditFlow,
+  FlowHandle,
+  FlowMode,
 } from "components";
-import { useCallback, useRef, useState } from "react";
-import { CreateJobSteps } from "./types";
-// import { Data as Step1Data } from "../../components/Step1Modal/Step1Modal";
-// import { Data as Step2Data } from "../../components/Step2Modal/Step2Modal";
+import { useCallback, useRef } from "react";
+import { JobWithoutId } from "./types";
 import { addJob, deleteJob } from "./api";
 import useJobs from "./hooks/useJobs";
 
 const Home = () => {
   const { jobs, fetchJobs } = useJobs();
-  const [step, setStep] = useState<CreateJobSteps>();
+  const ref = useRef<FlowHandle>(null);
 
-  const step1Data = useRef<Step1Data>();
-
-  const handleCreateJob = useCallback(() => {
-    setStep(CreateJobSteps.Step1);
-  }, []);
-
-  const handleStep1Complete = useCallback((data: Step1Data) => {
-    step1Data.current = data;
-    setStep(CreateJobSteps.Step2);
-  }, []);
-
-  const handleStep2Complete = useCallback(
-    async (data: Step2Data) => {
-      setStep(undefined);
+  const handleCreateFlowComplete = useCallback(
+    async (data: JobWithoutId) => {
       // create job api call
-      if (step1Data.current) {
-        await addJob({
-          ...step1Data.current,
-          ...data,
-        });
-      }
+      await addJob(data);
       // make api call
       await fetchJobs();
     },
     [fetchJobs]
   );
-
-  const handleStepClose = useCallback(() => {
-    setStep(undefined);
-  }, []);
-
   const handleDeleteJob = useCallback(
     async (jobId: number) => {
       await deleteJob(jobId);
@@ -59,7 +34,7 @@ const Home = () => {
   return (
     <div className="m-32">
       <div className="flex justify-end">
-        <Button onClick={handleCreateJob} name="Create Job" />
+        <Button onClick={ref.current?.start} name="Create Job" />
       </div>
       <div className="flex flex-wrap my-32">
         {jobs.map((job) => (
@@ -73,15 +48,10 @@ const Home = () => {
           />
         ))}
       </div>
-      <Step1Modal
-        visible={step === CreateJobSteps.Step1}
-        onPrimaryCtaPress={handleStep1Complete}
-        onModalClose={handleStepClose}
-      />
-      <Step2Modal
-        visible={step === CreateJobSteps.Step2}
-        onPrimaryCtaPress={handleStep2Complete}
-        onModalClose={handleStepClose}
+      <CreateEditFlow
+        ref={ref}
+        onFlowComplete={handleCreateFlowComplete}
+        mode={FlowMode.CREATE}
       />
     </div>
   );

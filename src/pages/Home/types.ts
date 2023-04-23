@@ -14,7 +14,9 @@ export interface Job {
   isExternalApply: boolean;
 }
 
-export enum CreateJobSteps {
+export type JobWithoutId = Omit<Job, "id">;
+
+export enum CreateEditJobSteps {
   Step1 = "Step1",
   Step2 = "Step2",
 }

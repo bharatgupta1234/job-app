@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Job } from "./types";
+import { Job, JobWithoutId } from "./types";
 
 const baseUrl = "https://643c08da70ea0e66029fddfd.mockapi.io/api/v1/";
 
@@ -8,7 +8,6 @@ const getJobs = async (): Promise<Job[]> => {
   return response.data;
 };
 
-type JobWithoutId = Omit<Job, "id">;
 const addJob = async (job: JobWithoutId): Promise<Job> => {
   const response = await axios.post(baseUrl + "jobs", {
     ...job,
