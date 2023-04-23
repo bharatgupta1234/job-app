@@ -66,7 +66,7 @@ const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props̉) => {
           onChange={handleTextInputs}
         />
         <TextInput
-          id="name"
+          id="company"
           placeholder="ex. Google"
           label="Company name"
           required

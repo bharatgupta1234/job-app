@@ -1,13 +1,32 @@
-import React from "react";
+import React, { MouseEventHandler, useCallback } from "react";
 
 interface Props {
   onClose?(): void;
+  visible: boolean;
   children: React.ReactNode;
 }
 
-const Modal = ({ onClose, children }: Props) => {
+const Modal = ({ onClose, children, visible }: Props) => {
+  const handleModalClose: MouseEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      // @ts-ignore
+      if (e.target.id === "container") {
+        onClose && onClose();
+      }
+    },
+    [onClose]
+  );
+
+  if (!visible) {
+    return null;
+  }
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center">
+    <div
+      id="container"
+      className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center"
+      onClick={handleModalClose}
+    >
       {children}
     </div>
   );

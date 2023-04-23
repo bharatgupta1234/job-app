@@ -97,6 +97,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             label="Experience"
             containerClassName="w-full"
             onChange={handleTextInputs}
+            type="number"
           />
           <span className="ml-24" />
           <TextInput
@@ -104,6 +105,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             placeholder="Maximum"
             containerClassName="w-full"
             onChange={handleTextInputs}
+            type="number"
           />
         </div>
         <div className="flex items-end justify-between mt-24">
@@ -113,6 +115,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             label="Salary"
             containerClassName="w-full"
             onChange={handleTextInputs}
+            type="number"
           />
           <span className="ml-24" />
           <TextInput
@@ -120,6 +123,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             placeholder="Maximum"
             containerClassName="w-full"
             onChange={handleTextInputs}
+            type="number"
           />
         </div>
         <TextInput
@@ -128,6 +132,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
           label="Total employee"
           placeholder="ex: 100"
           onChange={handleTextInputs}
+          type="number"
         />
 
         <Group
