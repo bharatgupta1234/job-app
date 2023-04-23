@@ -4,7 +4,7 @@ import { CreateJobSteps } from "./types";
 import { Step1Modal, Step2Modal } from "./components";
 import { Data as Step1Data } from "./components/Step1Modal";
 import { Data as Step2Data } from "./components/Step2Modal";
-import { addJob } from "./api";
+import { addJob, deleteJob } from "./api";
 import useJobs from "./hooks/useJobs";
 
 const Home = () => {
@@ -42,6 +42,14 @@ const Home = () => {
     setStep(undefined);
   }, []);
 
+  const handleDeleteJob = useCallback(
+    async (jobId: number) => {
+      await deleteJob(jobId);
+      await fetchJobs();
+    },
+    [fetchJobs]
+  );
+
   return (
     <div className="m-32">
       <div className="flex justify-end">
@@ -50,10 +58,12 @@ const Home = () => {
       <div className="flex flex-wrap my-32">
         {jobs.map((job) => (
           <JobCard
-            containerClassName="mb-32"
+            containerClassName="mb-32 mr-16"
             jobDetails={job}
             onPressApplyNow={() => {}}
             onPressExternalApply={() => {}}
+            onEdit={() => {}}
+            onDelete={handleDeleteJob}
           />
         ))}
       </div>

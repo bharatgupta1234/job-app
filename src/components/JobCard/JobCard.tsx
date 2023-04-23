@@ -3,12 +3,15 @@ import React from "react";
 import Netflix from "assets/netflix.svg";
 import { Button } from "components";
 import { Job } from "pages/Home/types";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 interface Props {
   jobDetails: Job;
   onPressApplyNow(): void;
   onPressExternalApply(): void;
   containerClassName: string;
+  onEdit?(): void;
+  onDelete?(jobId: number): void;
 }
 
 const JobCard = ({
@@ -16,19 +19,23 @@ const JobCard = ({
   onPressApplyNow,
   onPressExternalApply,
   containerClassName,
+  onEdit,
+  onDelete,
 }: Props) => {
   return (
     <div
-      className={`flex items-start py-16 px-24 border border-grey rounded-lg w-830 ${containerClassName}`}
+      className={`flex relative items-start py-16 px-24 border border-grey rounded-lg w-830  ${containerClassName}`}
     >
-      <img src={Netflix} alt="company logo" />
-      <div className="ml-8">
-        <div>
-          <p className="text-dark">{jobDetails.title}</p>
-          <p className="text-dark">{`${jobDetails.company} - ${jobDetails.industry}`}</p>
-          <p className="text-placeholder">
-            {`${jobDetails.location} (${jobDetails.remoteType})`}
-          </p>
+      <img src={Netflix} alt="company logo " />
+      <div className="ml-8 ">
+        <div className="flex justify-between ">
+          <span>
+            <p className="text-dark">{jobDetails.title}</p>
+            <p className="text-dark">{`${jobDetails.company} - ${jobDetails.industry}`}</p>
+            <p className="text-placeholder">
+              {`${jobDetails.location} (${jobDetails.remoteType})`}
+            </p>
+          </span>
         </div>
         <div className="my-24">
           <p className="text-dark">Part-Time (9.00 am - 5.00 pm IST)</p>
@@ -53,6 +60,18 @@ const JobCard = ({
           ) : null}
         </div>
       </div>
+      <span className="flex absolute right-16">
+        <AiFillEdit
+          size={"24px"}
+          onClick={onEdit}
+          className="mr-16 cursor-pointer"
+        />
+        <AiFillDelete
+          size={"24px"}
+          className="cursor-pointer"
+          onClick={() => onDelete && onDelete(jobDetails.id)}
+        />
+      </span>
     </div>
   );
 };
