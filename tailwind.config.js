@@ -40,6 +40,9 @@ module.exports = {
         24: "24px",
         32: "32px",
       },
+      minWidth: {
+        400: "400px",
+      },
     },
   },
   plugins: [],

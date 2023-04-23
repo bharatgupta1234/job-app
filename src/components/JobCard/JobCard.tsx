@@ -67,7 +67,7 @@ const JobCard = ({
 
   return (
     <div
-      className={`flex relative items-start py-16 px-24 border border-grey rounded-lg w-2/5	 ${containerClassName}`}
+      className={`flex relative items-start py-16 px-24 border border-grey rounded-lg w-2/5 min-w-400	 ${containerClassName}`}
     >
       <img src={Netflix} alt="company logo" />
       <div className="ml-8 ">
