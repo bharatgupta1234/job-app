@@ -1,21 +1,17 @@
 import { Button, JobCard } from "components";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { CreateJobSteps, Job } from "./types";
-import { getJobs } from "./api";
+import { useCallback, useRef, useState } from "react";
+import { CreateJobSteps } from "./types";
 import { Step1Modal, Step2Modal } from "./components";
 import { Data as Step1Data } from "./components/Step1Modal";
 import { Data as Step2Data } from "./components/Step2Modal";
 import { addJob } from "./api";
+import useJobs from "./hooks/useJobs";
 
 const Home = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
+  const { jobs, fetchJobs } = useJobs();
   const [step, setStep] = useState<CreateJobSteps>();
 
   const step1Data = useRef<Step1Data>();
-
-  const fetchJobs = useCallback(async () => {
-    getJobs().then((data) => setJobs(data));
-  }, []);
 
   const handleCreateJob = useCallback(() => {
     setStep(CreateJobSteps.Step1);
@@ -45,10 +41,6 @@ const Home = () => {
   const handleStepClose = useCallback(() => {
     setStep(undefined);
   }, []);
-
-  useEffect(() => {
-    fetchJobs();
-  }, [fetchJobs]);
 
   return (
     <div className="m-32">

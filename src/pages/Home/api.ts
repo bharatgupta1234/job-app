@@ -12,9 +12,6 @@ type JobWithoutId = Omit<Job, "id">;
 const addJob = async (job: JobWithoutId): Promise<Job> => {
   const response = await axios.post(baseUrl + "jobs", {
     ...job,
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
   return response.data;
 };
