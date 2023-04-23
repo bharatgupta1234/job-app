@@ -1,11 +1,18 @@
 import { Button, Modal, TextInput } from "components";
 import { useCallback, useEffect, useState } from "react";
 import { Job } from "../../pages/Home/types";
+import { capitalize } from "utils/string";
+import { error } from "console";
 
 export type Data = Pick<
   Job,
   "title" | "company" | "industry" | "location" | "remoteType"
 >;
+const requiredFields: Array<keyof Data> = ["title", "company", "industry"];
+interface Error {
+  fieldName: string;
+  error: string;
+}
 
 interface Props {
   onPrimaryCtaPress(data: Data): void;
@@ -28,13 +35,23 @@ const Step1Modal = ({
     location: initialData?.location ?? "",
     remoteType: initialData?.remoteType ?? "",
   });
+  const [errors, setErrors] = useState<Error[]>([{ fieldName: "", error: "" }]);
 
   useEffect(() => {
     setModalVisible(visible);
+    return () => setErrors([]);
   }, [visible]);
 
   const handleOnClose = useCallback(() => {
     setModalVisible((v) => !v);
+    setErrors([]);
+    setData({
+      title: "",
+      company: "",
+      industry: "",
+      location: "",
+      remoteType: "",
+    });
     onModalClose();
   }, [onModalClose]);
 
@@ -51,6 +68,19 @@ const Step1Modal = ({
   );
 
   const handleNext = useCallback(() => {
+    const errs: Error[] = [];
+    requiredFields.forEach((field) => {
+      if (!data[field]) {
+        errs.push({
+          fieldName: field,
+          error: `${capitalize(field)} is required`,
+        });
+      }
+    });
+    setErrors(errs);
+    if (errs.length !== 0) {
+      return;
+    }
     onPrimaryCtaPress(data);
   }, [data, onPrimaryCtaPress]);
 
@@ -69,6 +99,7 @@ const Step1Modal = ({
           containerClassName="mt-24"
           onChange={handleTextInputs}
           defaultValue={initialData?.title ?? ""}
+          errorMessage={errors.find((err) => err.fieldName === "title")?.error}
         />
         <TextInput
           id="company"
@@ -78,6 +109,9 @@ const Step1Modal = ({
           containerClassName="mt-24"
           onChange={handleTextInputs}
           defaultValue={initialData?.company ?? ""}
+          errorMessage={
+            errors.find((err) => err.fieldName === "company")?.error
+          }
         />
         <TextInput
           id="industry"
@@ -87,6 +121,9 @@ const Step1Modal = ({
           containerClassName="mt-24"
           onChange={handleTextInputs}
           defaultValue={initialData?.industry ?? ""}
+          errorMessage={
+            errors.find((err) => err.fieldName === "industry")?.error
+          }
         />
         <div className="flex justify-between mt-24">
           <TextInput

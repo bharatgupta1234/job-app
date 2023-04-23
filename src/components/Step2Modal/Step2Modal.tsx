@@ -55,6 +55,15 @@ const Step2Modal = ({
 
   const handleOnClose = useCallback(() => {
     setModalVisible((v) => !v);
+    setData({
+      minExp: "",
+      maxExp: "",
+      minSalary: "",
+      maxSalary: "",
+      totalEmployees: "",
+      isExternalApply: false,
+      isQuickApply: false,
+    });
     onModalClose();
   }, [onModalClose]);
 

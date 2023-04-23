@@ -6,11 +6,19 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   required?: boolean;
   containerClassName?: string;
+  errorMessage?: string;
 }
 
 function TextInput(props: Props) {
-  const { id, label, placeholder, required, containerClassName, ...restProps } =
-    props;
+  const {
+    id,
+    label,
+    placeholder,
+    required,
+    containerClassName,
+    errorMessage,
+    ...restProps
+  } = props;
   return (
     <div className={containerClassName}>
       {label ? (
@@ -25,8 +33,12 @@ function TextInput(props: Props) {
         type="text"
         aria-label="Job title"
         placeholder={placeholder}
+        required={required}
         {...restProps}
       />
+      {errorMessage && (
+        <p className="text-error font-medium text-sm mt-4">{errorMessage}</p>
+      )}
     </div>
   );
 }
