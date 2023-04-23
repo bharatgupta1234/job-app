@@ -46,11 +46,11 @@ const JobCard = ({
     <div
       className={`flex relative items-start py-16 px-24 border border-grey rounded-lg w-830  ${containerClassName}`}
     >
-      <img src={Netflix} alt="company logo " />
+      <img src={Netflix} alt="company logo" />
       <div className="ml-8 ">
         <div className="flex justify-between ">
           <span>
-            <p className="text-dark">{jobDetails.title}</p>
+            <p className="text-dark font-medium">{jobDetails.title}</p>
             <p className="text-dark">{`${jobDetails.company} - ${jobDetails.industry}`}</p>
             <p className="text-placeholder">
               {`${jobDetails.location} (${jobDetails.remoteType})`}
