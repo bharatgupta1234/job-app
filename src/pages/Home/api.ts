@@ -8,16 +8,20 @@ const getJobs = async (): Promise<Job[]> => {
   return response.data;
 };
 
-const addJob = async (job: Job): Promise<Job> => {
+type JobWithoutId = Omit<Job, "id">;
+const addJob = async (job: JobWithoutId): Promise<Job> => {
   const response = await axios.post(baseUrl + "jobs", {
-    body: job,
+    ...job,
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   return response.data;
 };
 
 const updateJob = async (job: Job): Promise<Job> => {
   const response = await axios.put(`${baseUrl}jobs/${job.id}`, {
-    body: job,
+    ...job,
   });
   return response.data;
 };
