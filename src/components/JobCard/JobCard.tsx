@@ -41,13 +41,13 @@ const JobCard = ({
         <div className="flex justify-between">
           {jobDetails.isQuickApply ? (
             <div className="mr-8">
-              <Button name="Apply Now" onPress={onPressApplyNow} />
+              <Button name="Apply Now" onClick={onPressApplyNow} />
             </div>
           ) : null}
           {jobDetails.isExternalApply ? (
             <Button
               name="External Apply"
-              onPress={onPressExternalApply}
+              onClick={onPressExternalApply}
               secondary
             />
           ) : null}
