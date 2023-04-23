@@ -15,9 +15,8 @@ function TextInput(props: Props) {
     <div className={containerClassName}>
       {label ? (
         <div className="pb-4">
-          <label className="font-medium">{`${label}${
-            required ? "*" : ""
-          }`}</label>
+          <label className="font-medium">{label}</label>
+          <span className="text-error font-medium">{required ? "*" : ""}</span>
         </div>
       ) : null}
       <input
