@@ -2,7 +2,6 @@ import { Button, Modal, TextInput } from "components";
 import { useCallback, useEffect, useState } from "react";
 import { Job } from "../../pages/Home/types";
 import { capitalize } from "utils/string";
-import { error } from "console";
 
 export type Data = Pick<
   Job,
