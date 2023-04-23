@@ -1,4 +1,4 @@
-import Step1 from "./Step1";
-import Step2 from "./Step2";
+import Step1Modal from "./Step1Modal";
+import Step2Modal from "./Step2Modal";
 
-export { Step1, Step2 };
+export { Step1Modal, Step2Modal };
