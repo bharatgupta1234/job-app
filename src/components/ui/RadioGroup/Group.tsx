@@ -19,9 +19,9 @@ const Group = ({
   const onToggle = useCallback(
     (value: OptionType) => {
       setSelectedId(value.id);
-      onChange(selectedId);
+      onChange(value.id);
     },
-    [onChange, selectedId]
+    [onChange]
   );
 
   return (
