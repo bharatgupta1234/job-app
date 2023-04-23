@@ -1,13 +1,7 @@
 import { Button, Modal, TextInput } from "components/ui";
 import { Group } from "components/ui/RadioGroup";
 import React, { useCallback, useEffect, useState } from "react";
-import { Job } from "../types";
-
-interface Props {
-  onPrimaryCtaPress(data: Data): void;
-  onModalClose(): void;
-  visible: boolean;
-}
+import { Job } from "../../pages/Home/types";
 
 export type Data = Pick<
   Job,
@@ -19,6 +13,13 @@ export type Data = Pick<
   | "isQuickApply"
   | "isExternalApply"
 >;
+
+interface Props {
+  onPrimaryCtaPress(data: Data): void;
+  onModalClose(): void;
+  visible: boolean;
+  initialData?: Data;
+}
 
 const initialValue: Data = {
   minExp: undefined,

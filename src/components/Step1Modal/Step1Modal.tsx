@@ -1,17 +1,18 @@
 import { Button, Modal, TextInput } from "components";
 import { useCallback, useEffect, useState } from "react";
-import { Job } from "../types";
-
-interface Props̉ {
-  onPrimaryCtaPress(data: Data): void;
-  onModalClose(): void;
-  visible: boolean;
-}
+import { Job } from "../../pages/Home/types";
 
 export type Data = Pick<
   Job,
   "title" | "company" | "industry" | "location" | "remoteType"
 >;
+
+interface Props {
+  onPrimaryCtaPress(data: Data): void;
+  onModalClose(): void;
+  visible: boolean;
+  initialData?: Data;
+}
 
 const initialValue: Data = {
   title: "",
@@ -21,7 +22,7 @@ const initialValue: Data = {
   remoteType: undefined,
 };
 
-const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props̉) => {
+const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props) => {
   const [modalVisible, setModalVisible] = useState<boolean>(visible);
   const [data, setData] = useState<Data>(initialValue);
 

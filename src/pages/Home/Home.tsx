@@ -1,9 +1,15 @@
-import { Button, JobCard } from "components";
+import {
+  Button,
+  JobCard,
+  Step1Modal,
+  Step2Modal,
+  Step1Data,
+  Step2Data,
+} from "components";
 import { useCallback, useRef, useState } from "react";
 import { CreateJobSteps } from "./types";
-import { Step1Modal, Step2Modal } from "./components";
-import { Data as Step1Data } from "./components/Step1Modal";
-import { Data as Step2Data } from "./components/Step2Modal";
+// import { Data as Step1Data } from "../../components/Step1Modal/Step1Modal";
+// import { Data as Step2Data } from "../../components/Step2Modal/Step2Modal";
 import { addJob, deleteJob } from "./api";
 import useJobs from "./hooks/useJobs";
 
