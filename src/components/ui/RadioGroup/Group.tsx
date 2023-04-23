@@ -6,6 +6,7 @@ interface Props {
   options: OptionType[];
   onChange(selectedId: string): void;
   containerClassName?: string;
+  defaultId?: string;
 }
 
 const Group = ({
@@ -13,8 +14,9 @@ const Group = ({
   onChange,
   label,
   containerClassName = "",
+  defaultId,
 }: Props) => {
-  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedId, setSelectedId] = useState<string>(defaultId ?? "");
 
   const onToggle = useCallback(
     (value: OptionType) => {

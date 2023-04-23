@@ -21,16 +21,6 @@ interface Props {
   initialData?: Data;
 }
 
-const initialValue: Data = {
-  minExp: undefined,
-  maxExp: undefined,
-  minSalary: undefined,
-  maxSalary: undefined,
-  totalEmployees: undefined,
-  isQuickApply: false,
-  isExternalApply: false,
-};
-
 const radioOptions = [
   {
     label: "Quick apply",
@@ -42,9 +32,22 @@ const radioOptions = [
   },
 ];
 
-const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
+const Step2Modal = ({
+  onPrimaryCtaPress,
+  onModalClose,
+  visible,
+  initialData,
+}: Props) => {
   const [modalVisible, setModalVisible] = useState<boolean>(visible);
-  const [data, setData] = useState<Data>(initialValue);
+  const [data, setData] = useState<Data>({
+    minExp: initialData?.minExp ?? "",
+    maxExp: initialData?.maxExp ?? "",
+    minSalary: initialData?.minSalary ?? "",
+    maxSalary: initialData?.maxSalary ?? "",
+    totalEmployees: initialData?.totalEmployees ?? "",
+    isExternalApply: initialData?.isExternalApply ?? false,
+    isQuickApply: initialData?.isQuickApply ?? false,
+  });
 
   useEffect(() => {
     setModalVisible(visible);
@@ -99,6 +102,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             containerClassName="w-full"
             onChange={handleTextInputs}
             type="number"
+            defaultValue={initialData?.minExp ?? ""}
           />
           <span className="ml-24" />
           <TextInput
@@ -107,6 +111,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             containerClassName="w-full"
             onChange={handleTextInputs}
             type="number"
+            defaultValue={initialData?.maxExp ?? ""}
           />
         </div>
         <div className="flex items-end justify-between mt-24">
@@ -117,6 +122,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             containerClassName="w-full"
             onChange={handleTextInputs}
             type="number"
+            defaultValue={initialData?.minSalary ?? ""}
           />
           <span className="ml-24" />
           <TextInput
@@ -125,6 +131,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
             containerClassName="w-full"
             onChange={handleTextInputs}
             type="number"
+            defaultValue={initialData?.maxSalary ?? ""}
           />
         </div>
         <TextInput
@@ -134,6 +141,7 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
           placeholder="ex: 100"
           onChange={handleTextInputs}
           type="number"
+          defaultValue={initialData?.totalEmployees ?? ""}
         />
 
         <Group
@@ -141,6 +149,13 @@ const Step2Modal = ({ onPrimaryCtaPress, onModalClose, visible }: Props) => {
           label="Apply type"
           onChange={handleApplyTypeRadio}
           options={radioOptions}
+          defaultId={
+            initialData?.isQuickApply
+              ? "quickApply"
+              : initialData?.isExternalApply
+              ? "externalApply"
+              : undefined
+          }
         />
 
         <Button

@@ -14,17 +14,20 @@ interface Props {
   initialData?: Data;
 }
 
-const initialValue: Data = {
-  title: "",
-  company: "",
-  industry: "",
-  location: undefined,
-  remoteType: undefined,
-};
-
-const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props) => {
+const Step1Modal = ({
+  visible,
+  onModalClose,
+  onPrimaryCtaPress,
+  initialData,
+}: Props) => {
   const [modalVisible, setModalVisible] = useState<boolean>(visible);
-  const [data, setData] = useState<Data>(initialValue);
+  const [data, setData] = useState<Data>({
+    title: initialData?.title ?? "",
+    company: initialData?.company ?? "",
+    industry: initialData?.industry ?? "",
+    location: initialData?.location ?? "",
+    remoteType: initialData?.remoteType ?? "",
+  });
 
   useEffect(() => {
     setModalVisible(visible);
@@ -65,6 +68,7 @@ const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props) => {
           required
           containerClassName="mt-24"
           onChange={handleTextInputs}
+          defaultValue={initialData?.title ?? ""}
         />
         <TextInput
           id="company"
@@ -73,6 +77,7 @@ const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props) => {
           required
           containerClassName="mt-24"
           onChange={handleTextInputs}
+          defaultValue={initialData?.company ?? ""}
         />
         <TextInput
           id="industry"
@@ -81,6 +86,7 @@ const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props) => {
           required
           containerClassName="mt-24"
           onChange={handleTextInputs}
+          defaultValue={initialData?.industry ?? ""}
         />
         <div className="flex justify-between mt-24">
           <TextInput
@@ -89,6 +95,7 @@ const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props) => {
             label="Location"
             containerClassName="w-full"
             onChange={handleTextInputs}
+            defaultValue={initialData?.location ?? ""}
           />
           <span className="ml-24" />
           <TextInput
@@ -97,6 +104,7 @@ const Step1Modal = ({ visible, onModalClose, onPrimaryCtaPress }: Props) => {
             label="Remote type"
             containerClassName="w-full"
             onChange={handleTextInputs}
+            defaultValue={initialData?.remoteType ?? ""}
           />
         </div>
         <Button

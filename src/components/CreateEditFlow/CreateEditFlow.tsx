@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { Step2Data, Step2Modal } from "components/Step2Modal";
 import { Step1Data, Step1Modal } from "components/Step1Modal";
-import { CreateEditJobSteps, JobWithoutId } from "pages/Home/types";
+import { CreateEditJobSteps, Job, JobWithoutId } from "pages/Home/types";
 
 export enum FlowMode {
   "EDIT" = "EDIT",
@@ -15,7 +15,8 @@ export enum FlowMode {
 
 interface Props {
   onFlowComplete(data: JobWithoutId): Promise<void>;
-  mode: FlowMode;
+  mode?: FlowMode;
+  data?: Job;
 }
 
 export interface FlowHandle {
@@ -23,7 +24,7 @@ export interface FlowHandle {
 }
 
 const CreateEditFlow = React.forwardRef<FlowHandle, Props>(
-  ({ onFlowComplete, mode = FlowMode.CREATE }: Props, ref) => {
+  ({ onFlowComplete, mode = FlowMode.CREATE, data }: Props, ref) => {
     const [step, setStep] = useState<CreateEditJobSteps>();
     const step1Data = useRef<Step1Data>();
 
@@ -59,11 +60,13 @@ const CreateEditFlow = React.forwardRef<FlowHandle, Props>(
           visible={step === CreateEditJobSteps.Step1}
           onPrimaryCtaPress={handleStep1Complete}
           onModalClose={handleStepClose}
+          initialData={data}
         />
         <Step2Modal
           visible={step === CreateEditJobSteps.Step2}
           onPrimaryCtaPress={handleStep2Complete}
           onModalClose={handleStepClose}
+          initialData={data}
         />
       </>
     );

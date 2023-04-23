@@ -6,8 +6,8 @@ import {
   FlowMode,
 } from "components";
 import { useCallback, useRef } from "react";
-import { JobWithoutId } from "./types";
-import { addJob, deleteJob } from "./api";
+import { Job, JobWithoutId } from "./types";
+import { addJob, deleteJob, updateJob } from "./api";
 import useJobs from "./hooks/useJobs";
 
 const Home = () => {
@@ -31,6 +31,14 @@ const Home = () => {
     [fetchJobs]
   );
 
+  const handleEditJob = useCallback(
+    async (job: Job) => {
+      await updateJob(job);
+      await fetchJobs();
+    },
+    [fetchJobs]
+  );
+
   return (
     <div className="m-32">
       <div className="flex justify-end">
@@ -39,12 +47,10 @@ const Home = () => {
       <div className="flex flex-wrap my-32">
         {jobs.map((job) => (
           <JobCard
-            containerClassName="mb-32 mr-16"
+            containerClassName="mb-32 mr-32"
             jobDetails={job}
-            onPressApplyNow={() => {}}
-            onPressExternalApply={() => {}}
-            onEdit={() => {}}
             onDelete={handleDeleteJob}
+            handleEditJob={handleEditJob}
           />
         ))}
       </div>

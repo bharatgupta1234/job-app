@@ -24,7 +24,7 @@ const Modal = ({ onClose, children, visible }: Props) => {
   return (
     <div
       id="container"
-      className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center"
+      className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50"
       onClick={handleModalClose}
     >
       {children}

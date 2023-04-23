@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 // @ts-ignore
 import Netflix from "assets/netflix.svg";
-import { Button } from "components";
-import { Job } from "pages/Home/types";
+import { Button, CreateEditFlow, FlowHandle, FlowMode } from "components";
+import { Job, JobWithoutId } from "pages/Home/types";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 interface Props {
   jobDetails: Job;
-  onPressApplyNow(): void;
-  onPressExternalApply(): void;
+  onPressApplyNow?(): void;
+  onPressExternalApply?(): void;
   containerClassName: string;
   onEdit?(): void;
   onDelete?(jobId: number): void;
+  handleEditJob(data: Job): Promise<void>;
 }
 
 const JobCard = ({
@@ -21,7 +22,26 @@ const JobCard = ({
   containerClassName,
   onEdit,
   onDelete,
+  handleEditJob,
 }: Props) => {
+  const editFlowRef = useRef<FlowHandle>(null);
+
+  const handleEdit = useCallback(() => {
+    editFlowRef.current?.start();
+    onEdit && onEdit();
+  }, [onEdit]);
+
+  const handleDelete = useCallback(() => {
+    onDelete && onDelete(jobDetails.id);
+  }, [jobDetails.id, onDelete]);
+
+  const handleEditFlowComplete = useCallback(
+    async (data: JobWithoutId) => {
+      await handleEditJob({ ...data, id: jobDetails.id });
+    },
+    [handleEditJob, jobDetails.id]
+  );
+
   return (
     <div
       className={`flex relative items-start py-16 px-24 border border-grey rounded-lg w-830  ${containerClassName}`}
@@ -63,15 +83,21 @@ const JobCard = ({
       <span className="flex absolute right-16">
         <AiFillEdit
           size={"24px"}
-          onClick={onEdit}
+          onClick={handleEdit}
           className="mr-16 cursor-pointer"
         />
         <AiFillDelete
           size={"24px"}
           className="cursor-pointer"
-          onClick={() => onDelete && onDelete(jobDetails.id)}
+          onClick={handleDelete}
         />
       </span>
+      <CreateEditFlow
+        ref={editFlowRef}
+        mode={FlowMode.EDIT}
+        onFlowComplete={handleEditFlowComplete}
+        data={jobDetails}
+      />
     </div>
   );
 };
